@@ -34,6 +34,7 @@ const config: Config = {
       {
         docs: {
           routeBasePath: "/",
+          sidebarCollapsible: false,
         },
         blog: false,
       } satisfies Preset.Options,
