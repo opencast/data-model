@@ -7,15 +7,15 @@ const config: Config = {
   title: 'Opencast Data Model',
 
   // Set the production url of your site here
-  url: 'https://TODO.com',
+  url: 'https://lukaskalbertodt.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/',
+  baseUrl: '/oc-data-model',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'opencast', // Usually your GitHub org/user name.
-  projectName: 'TODO', // Usually your repo name.
+  organizationName: 'LukasKalbertodt', // Usually your GitHub org/user name.
+  projectName: 'oc-data-model', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
