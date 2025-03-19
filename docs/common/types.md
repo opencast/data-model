@@ -40,6 +40,8 @@ For most types, the JSON serialization is the obvious one, but there are some mi
 - Arrays as arrays
 - Tuples as arrays
 - `Map<string, string>` is serialized as object
+- `DateTime`: as ISO 8601-compatible formatted string. The ISO standard actually allows a number of different formats by ommitting parts of the string. Opencast shall format all date times as either `YYYY-MM-DDTHH:mm:ss.sssZ` or `YYYY-MM-DDTHH:mm:ssZ`, i.e. only the sub-second part is optional. The parts on this format string are best described in [the ECMAScript specification](https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-date-time-string-format) (which again, is a subset of ISO 8601). Only thing of note: `Z` could either be literal `Z` or a timezone offset like `+02`.
+- `Timestamp`: like `DateTime` but always in UTC, so always ending with literal `Z`.
 
 ---
 
