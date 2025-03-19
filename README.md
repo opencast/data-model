@@ -9,8 +9,7 @@ Discussions take place in three places:
 - In [the GitHub discussions](https://github.com/opencast/data-model/discussions) on this repository, for broader topics.
 - In a bi-weekly meeting. To participate, it is expected that you have read the contents of this repository and are up to date with all discussions that took place here. For meeting dates, follow [the Opencast discussion](https://github.com/orgs/opencast/discussions).
 
-The rendered docs can be read here: https://lukaskalbertodt.github.io/oc-data-model/
-TODO: replace!
+The rendered docs can be read here: https://opencast.github.io/data-model
 
 ### Build
 
