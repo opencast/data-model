@@ -7,15 +7,15 @@ const config: Config = {
   title: 'Opencast Data Model',
 
   // Set the production url of your site here
-  url: 'https://lukaskalbertodt.github.io/',
+  url: 'https://opencast.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/oc-data-model',
+  baseUrl: '/data-model',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'LukasKalbertodt', // Usually your GitHub org/user name.
-  projectName: 'oc-data-model', // Usually your repo name.
+  organizationName: 'opencast', // Usually your GitHub org/user name.
+  projectName: 'data-model', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
