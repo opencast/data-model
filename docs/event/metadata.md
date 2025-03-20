@@ -17,11 +17,11 @@ sidebar_position: 2
 - `owner: Username`: TODO figure out details
 
 #### Time-data
-- `startTime: DateTime?`: Actual real life datetime when the video recording started or will start, with timezone. If this is not applicable, for example because it's a short movie, this should be undefined.
+- `startTime: DateTime?`: Actual real life datetime when the video recording started or will start, with timezone. If this is not applicable, for example because it's a short movie, this should be undefined. UIs should use this as primary date to show for a video and if unset, fallback to `created`.
 - `endTime: DateTime?`: Like `startTime`, but when the video recording stopped. Due to cutting, recording pauses and etc, the `duration` is not necessarily `end - start`.
 - `duration: Milliseconds` 🟦: duration of the event. As specified in ["assets"](./assets), this needs to always match the duration of all non-internal tracks.
 - `updated: Timestamp` 🟦: Timestamp of when anything about this event was last changed.
-- `created: Timestamp` 🟦: Timestamp of when the event was created in Opencast.<sup>1?</sup>
+- `created: Timestamp` 🟦: Timestamp of when the event was created in Opencast. It is set once when the event is first stored in Opencast's DB, and never changed again. This also implies that scheduled event's `created` date is when the scheduling took place, _not_ the time it is scheduled for (that would be `startDate`)
 
 #### Flags
 - `explicitContent: bool`: specifies whether this event contains content that is considered "explicit", like swear words or whatnot. This is required for some integrations like iTunes.
@@ -31,7 +31,7 @@ sidebar_position: 2
 - `listed: bool`: specifies whether this event should be considered "list", meaning that users can find it via search. If it is `false`, users have to know the ID of the event (e.g. via a series or playlist) in order to access it.
 
 #### Extra metadata
-- `extraMetadata: Map<Label, ???>`: additional metadata that Opencast never interprets, but just stores and passes along.<sup>(2?)</sup>
+- `extraMetadata: Map<Label, ???>`: additional metadata that Opencast never interprets, but just stores and passes along.<sup>(1?)</sup>
   - The keys of this map consists of a _namespace_ and a _field name_, separated by `:`, i.e. `ns:name`. Both parts must consist of only `a-z`, `A-Z`, `0-9`, `-` and `_`.
   - The namespace `dct` is special as it refers to the Dublin Core Terms specification, e.g. `dct:rightsHolder` refers to [the `rightsHolder` property](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rightsHolder) of DC terms. Also see [the DC mapping section below](#dublin-core-mapping). It should be avoided to set fields that already have a mapping, like `dct:title`, which is mapped to the OC core metadata `title`.
   - Unlike the "extended metadata" before, using `extraMetadata` does work out of the box and does not incur any relevant performance overhead. Therefore, applications are encouraged to add useful data here, e.g. `studip:course-id`, `oc-studio:version` or `ethz:room-number`.
@@ -67,6 +67,5 @@ TODO: Should we also define a mapping for OAIMPH? Does that make sense?
 
 :::danger[Open questions]
 
-- (1?) Should this ignore scheduling? Or should we always record the "created in Opencast", since scheduled events will have `startDate` set?
-- (2?) What values do we want to allow? `string` or string arrays are required, but maybe allow numbers? bools? Arbitrary JSON?
+- (1?) What values do we want to allow? `string` or string arrays are required, but maybe allow numbers? bools? Arbitrary JSON?
 :::
