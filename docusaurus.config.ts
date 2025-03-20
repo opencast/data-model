@@ -42,10 +42,19 @@ const config: Config = {
   ],
 
   themeConfig: {
+    colorMode: {
+      respectPrefersColorScheme: true,
+    },
     navbar: {
       title: 'Opencast Data Model',
       hideOnScroll: true,
-      items: [],
+      items: [
+        {
+            href: "https://github.com/opencast/data-model",
+            label: "GitHub",
+            position: "right",
+        },
+      ],
     },
     prism: {
       theme: prismThemes.github,
