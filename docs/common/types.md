@@ -7,9 +7,9 @@ sidebar_position: 2
 These are types used throughout the rest of this specification and defined here once to avoid repetition.
 
 - `string`: a valid UTF-8 string. While being processed in code, it might be in a different encoding temporarily, but in the public interface of Opencast, these are always valid UTF-8.
-- `NonBlankString`: **N**on-**E**mpty string.
-- `Neas`: **N**on-**E**mpty **A**SCII **S**tring.
-- `Label`: non-empty, ASCII-only string that only consists of letters, numbers or `-._~!*:@,;`. This means a label is URL-safe except for use in the domain part.<sup>(2?)</sup>
+- `NonBlankString`: A string that is not "blank", meaning it is not empty and does not consists only of [Unicode `White_Space`](https://www.unicode.org/Public/UCD/latest/ucd/PropList.txt).
+- `NonBlankAsciiString`: A `NonBlankString` that is also restricted to only using ASCII characters.
+- `Label`: a `NonBlankAsciiString` that only consists of letters, numbers or `-._~!*:@,;`. This means a label is URL-safe except for use in the domain part.<sup>(2?)</sup>
 - `ID`: a `Label` that cannot be changed after being created.
 - `Username`: TODO define rules for usernames
 - `LangCode`: specifies a language and optionally a region, e.g. `en` or `en-US`. Based on the [IETF BCP 47 language tag specification](https://www.rfc-editor.org/info/rfc5646): a two letter language code, optionally followed by a hyphen and a two letter region tag.
@@ -30,7 +30,7 @@ Generally, this basically uses TypeScript syntax:
 
 For most types, the JSON serialization is the obvious one, but there are some minor important details.
 - `bool` as `bool`
-- `string` and all "string with extra requirements" (e.g. `Label`, `ID`, `Neas`) as string
+- `string` and all "string with extra requirements" (e.g. `Label`, `ID`, `NonBlankAsciiString`) as string
 - Integers as number.
   - Note on 64 bit integers: In JavaScript, there is only one `number` type, which is a 64 bit floating point number (`double`, `f64`).
   Those can only exactly represent integers up to 2<sup>53</sup>.
