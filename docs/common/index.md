@@ -45,3 +45,13 @@ This data model promises certain properties about certain fields/data, for examp
   - We should never find us in the situation where external apps (e.g. LMS plugins) need to work around a broken property of Opencast.
 - The same goes for legacy events, which might be broken in the new model. They cannot be kept as is, they need to be changed/migrated to exhibit these properties.
 - The implementation should try, wherever possible, to make broken events impossible to represent. As a simple example, the title field in the DB should be `non null`.
+
+
+## Well defined API response
+
+While not technically part of the data model, the possible responses of APIs should be well defined and documented.
+The documentation should automatically be derived from the code in order to keep it up to date (which otherwise will absolutely fail).
+The implementation details need to be figured out, but the idea is that the same "code" (e.g. a Java `record` definition with attributes) that leads to the serialized API response is also used as source for the documentation.
+
+Users of the API should never need to look at an actual response to know what to expect.
+An actual response is always something *specific* and does not communicate what fields are optional and what possible values to expect for each field.
