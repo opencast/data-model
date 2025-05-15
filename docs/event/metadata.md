@@ -46,17 +46,37 @@ When *duplicating* an event, all fields are copied 1:1 unless specified otherwis
 
 
 ### Flags
-- `explicitContent: bool`: specifies whether this event contains content that is considered "explicit", like swear words or whatnot. This is required for some integrations like iTunes.
+
 - `isLive: bool` 🟦: TODO this is currently stored per track, figure out if that's useful
-- `downloadable: bool`: a flag indicating whether users are allowed to download this video (i.e. tracks attached to this event). This can inform external apps whether to show a download button or to enable anti-download protection. The exact effects of this flag are deliberately unspecified, this merely states an *intend*.
-- `listed: bool`: specifies whether this event should be considered "list", meaning that users can find it via search. If it is `false`, users have to know the ID of the event (e.g. via a series or playlist) in order to access it.
+
 
 ### Extra metadata
-- `extraMetadata: Map<Label, ???>`: additional metadata that Opencast never interprets, but just stores and passes along.<sup>(1?)</sup>
+- `extraMetadata: Map<Label, Json>`: additional metadata that Opencast never interprets, but just stores and passes along.
   - The keys of this map consists of a _namespace_ and a _field name_, separated by `:`, i.e. `ns:name`. Both parts must consist of only `a-z`, `A-Z`, `0-9`, `-` and `_`.
-  - The namespace `dct` is special as it refers to the Dublin Core Terms specification, e.g. `dct:rightsHolder` refers to [the `rightsHolder` property](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rightsHolder) of DC terms. Also see [the DC mapping section below](#dublin-core-mapping). It should be avoided to set fields that already have a mapping, like `dct:title`, which is mapped to the OC core metadata `title`.
+  - The values of this map are arbitrary JSON values, i.e. Booleans, numbers, strings, arrays, maps or `null`. Items of arrays & maps can recursively be any JSON value as well.
   - Unlike the "extended metadata" before, using `extraMetadata` does work out of the box and does not incur any relevant performance overhead. Therefore, applications are encouraged to add useful data here, e.g. `studip:course-id`, `oc-studio:version` or `ethz:room-number`.
-  - There should be a community resource for collecting used fields and best practices around `extraMetadata`. That way, common requirements are identified quickly and the community can converge towards a standard.
+
+#### Community documentation
+
+There should be a community document for specifying rules, as well as collecting used fields and best practices around `extraMetadata`.
+That way, common requirements are identified quickly and the community can converge towards a standard.
+
+> Official namespaces:
+> - **`oc`**: reserved.
+> - **`ocx`**: OC eXperimental for fields that might get promoted to core metadata field in the future.
+>   - `ocx:downloadable: bool`: a flag indicating whether users are allowed to download this video (i.e. tracks attached to this event). This can inform external apps whether to show a download button or to enable anti-download protection. The exact effects of this flag are deliberately unspecified, this merely states an *intent*.
+>   - `ocx:listed: bool`: specifies whether this event should be considered "list", meaning that users can find it via search. If it is `false`, users have to know the ID of the event (e.g. via a series or playlist) in order to access it.
+>   - `ocx:explicitContent: bool`: specifies whether this event contains content that is considered "explicit", like swear words or whatnot. This is required for some integrations like iTunes.
+> - **`dct`**: refers to the Dublin Core Terms specification, e.g. `dct:rightsHolder` refers to [the `rightsHolder` property](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rightsHolder) of DC terms. It should be avoided to set fields that are already mapped from core fields, like `dct:title`, which is mapped to the OC core metadatum `title`.
+>
+> Community namespaces:
+> - ...
+
+Generally, anyone should be able to add to the "Community namespaces" section via pull request against this document:
+its purpose is to document what is used, not for the OC committers to control what external apps do.
+In other words: a PR against that section is *not* asking for permission.
+
+
 
 
 
@@ -88,5 +108,5 @@ TODO: Should we also define a mapping for OAIMPH? Does that make sense?
 
 :::danger[Open questions]
 
-- (1?) What values do we want to allow? `string` or string arrays are required, but maybe allow numbers? bools? Arbitrary JSON?
+- ...
 :::
