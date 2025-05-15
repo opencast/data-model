@@ -23,6 +23,12 @@ When *duplicating* an event, all fields are copied 1:1 unless specified otherwis
 - `language: LangCode?`: describes the (main) language of this event and its metadata. For example, the audio language and (if applicable) language of video content is more important than the language of available subtitles. Generally, assets can have their own language specified.
 - `series: SeriesID?`: optional ID of the series this event belongs to. Must be a valid series ID of an existing series at all time.
 - `owner: Username`: TODO figure out details
+- `createdBy: Username` 🟦: username of the user that created this event.
+  - Like `created`, this refers to the moment when the event is first added to the database, not necessarily when it is ingested.
+  - This refers to the user with which the API request is authorized, e.g. potentially an API user and not referring to an actual human person.
+  - Technical field, not intended to be shown to normal users.
+  - Set by Opencast and cannot be changed.
+  - When duplicating an event, the new event has this field set to the duplicating user.
 
 ### Time-data
 - `startTime: DateTime?`: Actual real life datetime when the video recording started or will start, with timezone. If this is not applicable, for example because it's a short movie, this should be undefined. UIs should use this as primary date to show for a video and if unset, fallback to `created`.
@@ -42,8 +48,6 @@ When *duplicating* an event, all fields are copied 1:1 unless specified otherwis
 ### Flags
 - `explicitContent: bool`: specifies whether this event contains content that is considered "explicit", like swear words or whatnot. This is required for some integrations like iTunes.
 - `isLive: bool` 🟦: TODO this is currently stored per track, figure out if that's useful
-- `ingestUser: Username` 🟦: username of the user that created this event. Cannot be changed and is useful for tracking responsibility.
-  When duplicating an event, the new event has this field set to the duplicating user.
 - `downloadable: bool`: a flag indicating whether users are allowed to download this video (i.e. tracks attached to this event). This can inform external apps whether to show a download button or to enable anti-download protection. The exact effects of this flag are deliberately unspecified, this merely states an *intend*.
 - `listed: bool`: specifies whether this event should be considered "list", meaning that users can find it via search. If it is `false`, users have to know the ID of the event (e.g. via a series or playlist) in order to access it.
 
