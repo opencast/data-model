@@ -9,10 +9,13 @@ sidebar_position: 2
 
 (🟦) Metadata fields marked with this symbol are *Opencast-managed*: they are read-only for users/external applications. All other fields can be freely changed, as long as validity checks pass.
 
+When *duplicating* an event, all fields are copied 1:1 unless specified otherwise.
+
 ### General
 - `id: ID` 🟦: unique among all events.
   Can be chosen when creating an event, but cannot be changed afterwards.
   If no ID is specified while creating an event, Opencast generates a generated unguessable ID.
+  When duplicating an event, the new event gets a new unguessable ID.
 - `title: NonBlankString`: a short title that is the main label associated with this event for users. Plain text.
 - `description: string?`: user-specified, human-readable description, potentially quite long.
   - TODO: Decide whether this is plain text, markdown or anything else. External apps displaying this need to know that. Some basic formatting options might be nice?
@@ -26,12 +29,16 @@ sidebar_position: 2
 - `endTime: DateTime?`: Like `startTime`, but when the video recording stopped. Due to cutting, recording pauses and etc, the `duration` is not necessarily `end - start`.
 - `duration: Milliseconds` 🟦: duration of the event. As specified in ["assets"](./assets), this needs to always match the duration of all non-internal tracks.
 - `updated: Timestamp` 🟦: Timestamp of when anything about this event was last changed.
-- `created: Timestamp` 🟦: Timestamp of when the event was created in Opencast. It is set once when the event is first stored in Opencast's DB, and never changed again. This also implies that scheduled event's `created` date is when the scheduling took place, _not_ the time it is scheduled for (that would be `startDate`)
+  When duplicating an event, the new event has `updated = now()`, i.e. it is not copied.
+- `created: Timestamp` 🟦: Timestamp of when the event was created in Opencast. It is set once when the event is first stored in Opencast's DB, and never changed again. This also implies that scheduled event's `created` date is when the scheduling took place, _not_ the time it is scheduled for (that would be `startDate`).
+  When duplicating an event, the new event has `created = now()`, i.e. it is not copied.
+
 
 ### Flags
 - `explicitContent: bool`: specifies whether this event contains content that is considered "explicit", like swear words or whatnot. This is required for some integrations like iTunes.
 - `isLive: bool` 🟦: TODO this is currently stored per track, figure out if that's useful
 - `ingestUser: Username` 🟦: username of the user that created this event. Cannot be changed and is useful for tracking responsibility.
+  When duplicating an event, the new event has this field set to the duplicating user.
 - `downloadable: bool`: a flag indicating whether users are allowed to download this video (i.e. tracks attached to this event). This can inform external apps whether to show a download button or to enable anti-download protection. The exact effects of this flag are deliberately unspecified, this merely states an *intend*.
 - `listed: bool`: specifies whether this event should be considered "list", meaning that users can find it via search. If it is `false`, users have to know the ID of the event (e.g. via a series or playlist) in order to access it.
 
