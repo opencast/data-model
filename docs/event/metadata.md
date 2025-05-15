@@ -28,8 +28,12 @@ When *duplicating* an event, all fields are copied 1:1 unless specified otherwis
 - `startTime: DateTime?`: Actual real life datetime when the video recording started or will start, with timezone. If this is not applicable, for example because it's a short movie, this should be undefined. UIs should use this as primary date to show for a video and if unset, fallback to `created`.
 - `endTime: DateTime?`: Like `startTime`, but when the video recording stopped. Due to cutting, recording pauses and etc, the `duration` is not necessarily `end - start`.
 - `duration: Milliseconds` 🟦: duration of the event. As specified in ["assets"](./assets), this needs to always match the duration of all non-internal tracks.
-- `updated: Timestamp` 🟦: Timestamp of when anything about this event was last changed.
-  When duplicating an event, the new event has `updated = now()`, i.e. it is not copied.
+- `modified: Timestamp` 🟦: Timestamp of when anything about this event was last changed.
+  - More precisely: at any point in time since `modified`, all fields, assets, ACL and any other part of the event data model need to have the exact same value as they have at the present moment.
+  Whenever anything about an event described in this data model changes, `modified` has to be set to `now()`.
+    - Noteworthy case: when a series is deleted and the event's `series` field is set to `null`, the event's `modified` needs to change.
+    - Opencast should try its best to not update `modified` when it's not necessary (e.g. when the title is set to the current value), but it is not a bug if `modified` is set to `now()` unnecessarily.
+  - When duplicating an event, the new event has `modified = now()`, i.e. it is not copied.
 - `created: Timestamp` 🟦: Timestamp of when the event was created in Opencast. It is set once when the event is first stored in Opencast's DB, and never changed again. This also implies that scheduled event's `created` date is when the scheduling took place, _not_ the time it is scheduled for (that would be `startDate`).
   When duplicating an event, the new event has `created = now()`, i.e. it is not copied.
 
@@ -67,7 +71,7 @@ The mapping is as follows:
 - [`creator`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator): `creators`
 - [`language`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/language): `language`
 - [`isPartOf`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isPartOf): `series` (i.e. the ID)
-- [`modified`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/modified): `updated`
+- [`modified`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/modified): `modified`
 - [`extend`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/extent): `duration` as ISO 8601 duration
 - `date` or `temporal`???: TODO combination of `startDate` and `endDate`
 - `created` or `dateSubmitted` or `issued`???: TODO `created`
