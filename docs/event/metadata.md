@@ -4,6 +4,9 @@ sidebar_position: 2
 
 # Metadata
 
+
+## Fields
+
 (🟦) Metadata fields marked with this symbol are *Opencast-managed*: they are read-only for users/external applications. All other fields can be freely changed, as long as validity checks pass.
 
 ### General
@@ -18,21 +21,21 @@ sidebar_position: 2
 - `series: SeriesID?`: optional ID of the series this event belongs to. Must be a valid series ID of an existing series at all time.
 - `owner: Username`: TODO figure out details
 
-#### Time-data
+### Time-data
 - `startTime: DateTime?`: Actual real life datetime when the video recording started or will start, with timezone. If this is not applicable, for example because it's a short movie, this should be undefined. UIs should use this as primary date to show for a video and if unset, fallback to `created`.
 - `endTime: DateTime?`: Like `startTime`, but when the video recording stopped. Due to cutting, recording pauses and etc, the `duration` is not necessarily `end - start`.
 - `duration: Milliseconds` 🟦: duration of the event. As specified in ["assets"](./assets), this needs to always match the duration of all non-internal tracks.
 - `updated: Timestamp` 🟦: Timestamp of when anything about this event was last changed.
 - `created: Timestamp` 🟦: Timestamp of when the event was created in Opencast. It is set once when the event is first stored in Opencast's DB, and never changed again. This also implies that scheduled event's `created` date is when the scheduling took place, _not_ the time it is scheduled for (that would be `startDate`)
 
-#### Flags
+### Flags
 - `explicitContent: bool`: specifies whether this event contains content that is considered "explicit", like swear words or whatnot. This is required for some integrations like iTunes.
 - `isLive: bool` 🟦: TODO this is currently stored per track, figure out if that's useful
 - `ingestUser: Username` 🟦: username of the user that created this event. Cannot be changed and is useful for tracking responsibility.
 - `downloadable: bool`: a flag indicating whether users are allowed to download this video (i.e. tracks attached to this event). This can inform external apps whether to show a download button or to enable anti-download protection. The exact effects of this flag are deliberately unspecified, this merely states an *intend*.
 - `listed: bool`: specifies whether this event should be considered "list", meaning that users can find it via search. If it is `false`, users have to know the ID of the event (e.g. via a series or playlist) in order to access it.
 
-#### Extra metadata
+### Extra metadata
 - `extraMetadata: Map<Label, ???>`: additional metadata that Opencast never interprets, but just stores and passes along.<sup>(1?)</sup>
   - The keys of this map consists of a _namespace_ and a _field name_, separated by `:`, i.e. `ns:name`. Both parts must consist of only `a-z`, `A-Z`, `0-9`, `-` and `_`.
   - The namespace `dct` is special as it refers to the Dublin Core Terms specification, e.g. `dct:rightsHolder` refers to [the `rightsHolder` property](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rightsHolder) of DC terms. Also see [the DC mapping section below](#dublin-core-mapping). It should be avoided to set fields that already have a mapping, like `dct:title`, which is mapped to the OC core metadata `title`.
