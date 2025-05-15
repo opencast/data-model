@@ -6,8 +6,10 @@ sidebar_position: 2
 
 (🟦) Metadata fields marked with this symbol are *Opencast-managed*: they are read-only for users/external applications. All other fields can be freely changed, as long as validity checks pass.
 
-#### General
+### General
 - `id: ID` 🟦: unique among all events.
+  Can be chosen when creating an event, but cannot be changed afterwards.
+  If no ID is specified while creating an event, Opencast generates a generated unguessable ID.
 - `title: NonBlankString`: a short title that is the main label associated with this event for users. Plain text.
 - `description: string?`: user-specified, human-readable description, potentially quite long.
   - TODO: Decide whether this is plain text, markdown or anything else. External apps displaying this need to know that. Some basic formatting options might be nice?
