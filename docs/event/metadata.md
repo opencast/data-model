@@ -13,9 +13,9 @@ When *duplicating* an event, all fields are copied 1:1 unless specified otherwis
 
 ### General
 - `id: ID` 🟦: unique among all events.
-  Can be chosen when creating an event, but cannot be changed afterwards.
-  If no ID is specified while creating an event, Opencast generates a generated unguessable ID.
-  When duplicating an event, the new event gets a new unguessable ID.
+  - Can be chosen when creating an event, but cannot be changed afterwards.
+  - If no ID is specified while creating an event, Opencast generates a generated unguessable ID.
+  - When duplicating an event, the new event gets a new unguessable ID.
 - `title: NonBlankString`: a short title that is the main label associated with this event for users. Plain text.
 - `description: string?`: user-specified, human-readable description, potentially quite long.
   - TODO: Decide whether this is plain text, markdown or anything else. External apps displaying this need to know that. Some basic formatting options might be nice?
@@ -34,8 +34,9 @@ When *duplicating* an event, all fields are copied 1:1 unless specified otherwis
     - Noteworthy case: when a series is deleted and the event's `series` field is set to `null`, the event's `modified` needs to change.
     - Opencast should try its best to not update `modified` when it's not necessary (e.g. when the title is set to the current value), but it is not a bug if `modified` is set to `now()` unnecessarily.
   - When duplicating an event, the new event has `modified = now()`, i.e. it is not copied.
-- `created: Timestamp` 🟦: Timestamp of when the event was created in Opencast. It is set once when the event is first stored in Opencast's DB, and never changed again. This also implies that scheduled event's `created` date is when the scheduling took place, _not_ the time it is scheduled for (that would be `startDate`).
-  When duplicating an event, the new event has `created = now()`, i.e. it is not copied.
+- `created: Timestamp` 🟦: Timestamp of when the event was created in Opencast. It is set once when the event is first stored in Opencast's DB, and never changed again.
+  - This also implies that scheduled event's `created` date is when the scheduling took place, _not_ the time it is scheduled for (that would be `startDate`).
+  - When duplicating an event, the new event has `created = now()`, i.e. it is not copied.
 
 
 ### Flags
