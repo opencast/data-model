@@ -47,6 +47,14 @@ This data model promises certain properties about certain fields/data, for examp
 - The implementation should try, wherever possible, to make broken events impossible to represent. As a simple example, the title field in the DB should be `non null`.
 
 
+## Multi-tenancy
+
+The rest of these specs pretend like there is only one tenant.
+Multi-tenancy will be implemented on a "higher level of abstraction" than this data model.
+As a simple example: each tenant has its own database and folder on the file system.
+This not only makes proper isolation easier and improves the code by not mixing this complexity into other logic, it also makes writing this specification easier.
+
+
 ## Well defined API response
 
 While not technically part of the data model, the possible responses of APIs should be well defined and documented.
