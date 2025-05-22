@@ -5,7 +5,6 @@
   - Storage wise, keeping old metadata does not cost much.
   - Via the `internal` asset system, we can already kind of version assets.
   - Get rid of the current asset manager/snapshot system to avoid hardlinks.
-- Use more compact ID encoding by default? Hex encoded UUID4 is wasteful and makes for long URLs. (36 -> 21 chars... maybe not worth it)
 - What do we generally think about size limitations for various fields?
   - Abuse protection: this is just to prevent abuse, DOS, slow downs and stuff like that. Limit `description` to 2<sup>16</sup> bytes, limit `title`, `license`, ... to 1024 bytes. I think these limits make sense and should prevent OC suffering from bad payloads.
   - Semantic limits: for example, for `license`, we could say "it should just be a identifier for a license, so limit to 64 bytes". This is a lot more tricky as one has to really think of the intended use case and runs the risk of making use cases impossible.
