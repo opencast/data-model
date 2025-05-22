@@ -15,6 +15,7 @@ Only a handful of files are stored on the file system:
 
 :::info[Differences from current OC model]
 In particular, textual metadata, ACLs, cutting information or anything like that is _not_ stored on the file system!
+(Some APIs might still accept or produce these information in non-JSON exchange formats.)
 :::
 
 The database never references files by absolut path or URL.
