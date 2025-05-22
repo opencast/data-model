@@ -13,8 +13,6 @@ An event consists of:
 As described [here](../common#data-storage), almost all of this data is stored in the DB.
 Only the actual asset files are stored on the file system (the metadata about assets is still stored in the DB).
 
-In terms of API response, it might look like this:
-
 
 ---
 
