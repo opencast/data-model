@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Event
 
-An event<sup>(1?)</sup> is the core entity of Opencast, representing a video content.
+An event<sup>(1?)</sup> is the core entity of Opencast, representing a multimedia content.
 An event consists of:
 - [Metadata](./metadata)
 - [ACL](./acl)
