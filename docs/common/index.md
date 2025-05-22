@@ -58,9 +58,8 @@ This not only makes proper isolation easier and improves the code by not mixing 
 
 ## Well defined API response
 
-While not technically part of the data model, the possible responses of APIs should be well defined and documented.
-The documentation should automatically be derived from the code in order to keep it up to date (which otherwise will absolutely fail).
-The implementation details need to be figured out, but the idea is that the same "code" (e.g. a Java `record` definition with attributes) that leads to the serialized API response is also used as source for the documentation.
-
-Users of the API should never need to look at an actual response to know what to expect.
-An actual response is always something *specific* and does not communicate what fields are optional and what possible values to expect for each field.
+Opencast's API should have a well defined/typed response that is derived from code in a [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) fashion.
+Specifically, the API documentation for e.g. `GET /event/{id}` needs to specify what kind of JSON object will be returned by the API.
+This could be done via a [JSON Schema](https://json-schema.org/) or via GraphQL or other means.
+Someone interested in using the API should know _exactly_ what response to expect, without sending a single test request to the API.
+It is important, that the response specification is generated from the same code that is used for the actual API response serialization, to ensure they are always in sync.
