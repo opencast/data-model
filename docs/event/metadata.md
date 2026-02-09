@@ -18,7 +18,11 @@ When *duplicating* an event, all fields are copied 1:1 unless specified otherwis
   - When duplicating an event, the new event gets a new unguessable ID.
 - `title: NonBlankString`: a short title that is the main label associated with this event for users. Plain text.
 - `description: string?`: user-specified, human-readable description, potentially quite long.
-  - TODO: Decide whether this is plain text, markdown or anything else. External apps displaying this need to know that. Some basic formatting options might be nice?
+  - The text is *not* markdown, but plain text. However, there are some rules about how the text should be displayed:
+    - Parts of the text separated by `\n\n` must each be treated as a paragraph (rendered with `<p>`). The space between paragraphs must be between 1.5 and 2 times the line height.
+    - Within a paragraph, `\n` must be rendered as a visible line break.
+    - *Optional recommendation*: valid HTTP(s) URLs in the text may be rendered as proper link element (`<a>`). Exactly specifying an allowed URL grammar is overkill for this specification: applications should use well-known library to perform link detection, with a conservative bias to avoid false positives.
+    - Any other text must be displayed verbatim. For example, HTML tags inside the text need to be escaped.
 - `creators: NonBlankString[]`: The people mainly responsible for creating this video and/or presenting the talk which this video is a recording of. Should contain human-readable names and not usernames. Plain text. This is the main "who?"-information shown in the UIs; other fields in `extraMetadata` (e.g. `dct:contributor`) might be shown too, but less prominently.
 - `language: LangCode?`: describes the (main) language of this event and its metadata. For example, the audio language and (if applicable) language of video content is more important than the language of available subtitles. Generally, assets can have their own language specified.
 - `series: SeriesID?`: optional ID of the series this event belongs to. Must be a valid series ID of an existing series at all time.
