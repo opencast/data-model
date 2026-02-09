@@ -29,9 +29,9 @@ A track is an attachment with time-component and "lives on a timeline", i.e. rep
 A cut operation on the video needs to modify all tracks.
 
 Each track has one or more streams.
-For example, an `mp4` track might have a video and audio stream, while a `vtt` track only has a single text track.
+For example, an `mp4` track might have a video and audio stream, while a `vtt` track only has a single text stream.
 
-- `tracks: Track[]`
+- `streams: Stream[]`
 - `isLive: bool` <sup>(5?)</sup>
 - `isMaster: bool`: <sup>TODO: describe what exactly this means</sup>
 - `duration: Milliseconds`
