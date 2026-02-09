@@ -64,8 +64,8 @@ That way, common requirements are identified quickly and the community can conve
 > Official namespaces:
 > - **`oc`**: reserved.
 > - **`ocx`**: OC eXperimental for fields that might get promoted to core metadata field in the future.
->   - `ocx:downloadable: bool`: a flag indicating whether users are allowed to download this video (i.e. tracks attached to this event). This can inform external apps whether to show a download button or to enable anti-download protection. The exact effects of this flag are deliberately unspecified, this merely states an *intent*.
->   - `ocx:listed: bool`: specifies whether this event should be considered "list", meaning that users can find it via search. If it is `false`, users have to know the ID of the event (e.g. via a series or playlist) in order to access it.
+>   - `ocx:downloadable: bool`: a flag indicating whether users are allowed to download this video (i.e. tracks attached to this event). This can inform external apps whether to show a download button or to enable anti-download protection. The exact effects of this flag are deliberately unspecified, this merely states an *intent*. *Note* (TODO): this is currently discussed [in this issue](https://github.com/opencast/data-model/issues/11).
+>   - `ocx:listed: bool`: specifies whether this event should be considered "listed", meaning that users can find it via search. If it is `false`, users have to know the ID of the event (e.g. via a series or playlist) in order to access it.
 >   - `ocx:explicitContent: bool`: specifies whether this event contains content that is considered "explicit", like swear words or whatnot. This is required for some integrations like iTunes.
 > - **`dct`**: refers to the Dublin Core Terms specification, e.g. `dct:rightsHolder` refers to [the `rightsHolder` property](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rightsHolder) of DC terms. It should be avoided to set fields that are already mapped from core fields, like `dct:title`, which is mapped to the OC core metadatum `title`.
 >
