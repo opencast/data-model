@@ -11,7 +11,8 @@ These are types used throughout the rest of this specification and defined here 
 - `NonBlankAsciiString`: A `NonBlankString` that is also restricted to only using ASCII characters.
 - `Label`: a `NonBlankAsciiString` that only consists of letters, numbers or `-._~!*:@,;`. This means a label is URL-safe except for use in the domain part.<sup>(2?)</sup>
 - `ID`: a `Label` that cannot be changed after being created.
-- `Username`: TODO define rules for usernames
+- `Ident`: a yet to be specified subset of `NonBlankString`, see https://github.com/opencast/data-model/issues/8. Maybe this type will be merged with `Label`.
+- `Username`: an `Ident` to specify a user.
 - `LangCode`: specifies a language and optionally a region, e.g. `en` or `en-US`. Based on the [IETF BCP 47 language tag specification](https://www.rfc-editor.org/info/rfc5646): a two letter language code, optionally followed by a hyphen and a two letter region tag.
 - `int8`, `int16`, `int32`, `int64`: signed integers of specific bit width.
 - `uint8`, `uint16`, `uint32`, `uint64`: unsigned integers of specific bit width.<sup>(1?)</sup>
