@@ -41,7 +41,7 @@ When *duplicating* an event, all fields are copied 1:1 unless specified otherwis
 - `modified: Timestamp` 🟦: Timestamp of when anything about this event was last changed.
   - More precisely: at any point in time since `modified`, all fields, assets, ACL and any other part of the event data model need to have the exact same value as they have at the present moment.
   Whenever anything about an event described in this data model changes, `modified` has to be set to `now()`.
-    - Noteworthy case: when a series is deleted and the event's `series` field is set to `null`, the event's `modified` needs to change.
+    - Noteworthy case: when the `series` field is changed (potentially triggered by deleting that series), the event's `modified` needs to change.
     - Opencast should try its best to not update `modified` when it's not necessary (e.g. when the title is set to the current value), but it is not a bug if `modified` is set to `now()` unnecessarily.
   - When duplicating an event, the new event has `modified = now()`, i.e. it is not copied.
 - `created: Timestamp` 🟦: Timestamp of when the event was created in Opencast. It is set once when the event is first stored in Opencast's DB, and never changed again.
