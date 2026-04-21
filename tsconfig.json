@@ -2,6 +2,8 @@
   // This file is not used in compilation. It is here just for a nice editor experience.
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
+    // Necessary due to https://github.com/facebook/docusaurus/issues/11893.
+    // Can be removed once we upgrade to Docusaurus v4.
     "ignoreDeprecations": "6.0",
   },
   "exclude": [".docusaurus", "build"]
