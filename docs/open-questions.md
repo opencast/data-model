@@ -12,7 +12,7 @@
 
 ## TODO
 
-- Metadata can be changed when a workflow is running or an event is scheduled
+- Metadata can be changed when a workflow is running
   - Mhhh small problem: some workflows might depend on metadata, e.g. when creating images with metadata in them. So maybe workflows can declare dependencies to metadata?
   - So maybe we cannot do this now, this feature we can still add in a second step. When we rework the workflow system 😈
 - Explain how snapshots are removed
