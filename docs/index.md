@@ -10,7 +10,7 @@ The data model describes everything that is stored, what types and requirements 
 
 :::warning
 This specification does *not* describe the current state of Opencast!
-Also, it is a work in progress and is currently being developed and discuss in the community.
+Also, it is a work in progress and is currently being developed and discussed in the community.
 :::
 
 Readers familiar with Opencast should ignore their prior knowledge while reading this, and treat this as a specification for a completely new software.
