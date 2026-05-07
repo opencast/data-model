@@ -10,12 +10,12 @@ This page mentions a number of major ways, in how this specification differs fro
 ## No snapshot system anymore
 
 The old system of creating snapshots and using hardlinks on the file system is no more.
-Whether and how want to version parts of an entity's data is still questionable (see [Open Questions](./open-questions)).
+Whether and how we want to version parts of an entity's data is still questionable (see [Open Questions](./open-questions)).
 
 
 ## No publications
 
-There is no "engage", "external API", OAIMPH or any other internal _publication_ anymore.
+There is no "engage", "external API", OAI-PMH or any other internal _publication_ anymore.
 There might still be a place for external publications in the sense of interacting with another system like YouTube.
 These would require some async data synchronization and stuff.
 But hardly anyone is using that, so while reading this specification just think: there are no publications at all.

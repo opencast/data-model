@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Event
 
-An event<sup>(1?)</sup> is the core entity of Opencast, representing a multimedia content.
+An event<sup>(1?)</sup> is the core entity of Opencast, representing a piece of multimedia content.
 An event consists of:
 - [Metadata](./metadata)
 - [ACL](./acl)
@@ -21,6 +21,6 @@ Only the actual asset files are stored on the file system (the metadata about as
 - (1?) Potentially very controversial: rename "event"/"episode" to "video"?
   - Intuitively, most people call it "video"
   - "Event" is a very generic term and can mean many other things, "episode" implies being part of a series.
-  - Yes, there can be two _video files_, but we already have a name for that: video stream. So Idon't see a confusion risk here. I don't see any problems with calling a thing a video even if it contains two video streams.
+  - Yes, there can be two _video files_, but we already have a name for that: video stream. So I don't see a confusion risk here. I don't see any problems with calling a thing a video even if it contains two video streams.
   - New name in API would make clear that data model has changed.
 :::

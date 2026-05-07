@@ -21,7 +21,7 @@ When *duplicating* an event, all fields are copied 1:1 unless specified otherwis
   - The text is *not* markdown, but plain text. However, there are some rules about how the text should be displayed:
     - Parts of the text separated by `\n\n` must each be treated as a paragraph (rendered with `<p>`). The space between paragraphs must be between 1.5 and 2 times the line height.
     - Within a paragraph, `\n` must be rendered as a visible line break.
-    - *Optional recommendation*: valid HTTP(s) URLs in the text may be rendered as proper link element (`<a>`). Exactly specifying an allowed URL grammar is overkill for this specification: applications should use well-known library to perform link detection, with a conservative bias to avoid false positives.
+    - *Optional recommendation*: valid HTTP(s) URLs in the text may be rendered as proper link element (`<a>`). Exactly specifying an allowed URL grammar is overkill for this specification: applications should use well-known libraries to perform link detection, with a conservative bias to avoid false positives.
     - Any other text must be displayed verbatim. For example, HTML tags inside the text need to be escaped.
 - `creators: NonBlankString[]`: The people mainly responsible for creating this video and/or presenting the talk which this video is a recording of. Should contain human-readable names and not usernames. Plain text. This is the main "who?"-information shown in the UIs; other fields in `extraMetadata` (e.g. `dct:contributor`) might be shown too, but less prominently.
 - `language: LangCode?`: describes the (main) language of this event and its metadata. For example, the audio language and (if applicable) language of video content is more important than the language of available subtitles. Generally, assets can have their own language specified.
@@ -67,11 +67,11 @@ That way, common requirements are identified quickly and the community can conve
 
 > Official namespaces:
 > - **`oc`**: reserved.
-> - **`ocx`**: OC eXperimental for fields that might get promoted to core metadata field in the future.
+> - **`ocx`**: OC eXperimental for fields that might get promoted to a core metadata field in the future.
 >   - `ocx:downloadable: bool`: a flag indicating whether users are allowed to download this video (i.e. tracks attached to this event). This can inform external apps whether to show a download button or to enable anti-download protection. The exact effects of this flag are deliberately unspecified, this merely states an *intent*. *Note* (TODO): this is currently discussed [in this issue](https://github.com/opencast/data-model/issues/11).
 >   - `ocx:listed: bool`: specifies whether this event should be considered "listed", meaning that users can find it via search. If it is `false`, users have to know the ID of the event (e.g. via a series or playlist) in order to access it.
 >   - `ocx:explicitContent: bool`: specifies whether this event contains content that is considered "explicit", like swear words or whatnot. This is required for some integrations like iTunes.
-> - **`dct`**: refers to the Dublin Core Terms specification, e.g. `dct:rightsHolder` refers to [the `rightsHolder` property](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rightsHolder) of DC terms. It should be avoided to set fields that are already mapped from core fields, like `dct:title`, which is mapped to the OC core metadatum `title`.
+> - **`dct`**: refers to the Dublin Core Terms specification, e.g. `dct:rightsHolder` refers to [the `rightsHolder` property](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/rightsHolder) of DC terms. It should be avoided to set fields that are already mapped from core fields, like `dct:title`, which is mapped to the OC core metadata field `title`.
 >
 > Community namespaces:
 > - ...
@@ -101,7 +101,7 @@ The mapping is as follows:
 - [`language`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/language): `language`
 - [`isPartOf`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/isPartOf): `series` (i.e. the ID)
 - [`modified`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/modified): `modified`
-- [`extend`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/extent): `duration` as ISO 8601 duration
+- [`extent`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/extent): `duration` as ISO 8601 duration
 - `date` or `temporal`???: TODO combination of `startDate` and `endDate`
 - `created` or `dateSubmitted` or `issued`???: TODO `created`
 - Additionally, all fields in `extraMetadata` with `dct` namespace are mapped directly to the corresponding property, e.g. `dct:license` is mapped to [`license`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/license).
