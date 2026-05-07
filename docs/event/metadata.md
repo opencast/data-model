@@ -107,10 +107,3 @@ The mapping is as follows:
 - Additionally, all fields in `extraMetadata` with `dct` namespace are mapped directly to the corresponding property, e.g. `dct:license` is mapped to [`license`](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/license).
 
 TODO: Should we also define a mapping for OAIMPH? Does that make sense?
-
----
-
-:::danger[Open questions]
-
-- ...
-:::

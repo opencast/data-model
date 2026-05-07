@@ -15,10 +15,3 @@ Other actions can be used for custom purposes by external applications.
 - `write`: generally, gives write access to an entity (changing or deleting it)
 
 *Impl note*: `read` and `write` roles should likely be stored in a way that allows for fast filtering, e.g. in a `read_roles` DB column that has a DB index.
-
-
----
-
-:::danger[Open questions]
-
-:::
